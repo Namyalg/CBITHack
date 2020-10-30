@@ -7,21 +7,23 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>CTRL-R --DASHBOARD</title>
+    <title>CTRL-R -- CALENDER</title>
 
+    <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
-
+    <!--external css-->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-
+    <link href="assets/js/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+        
+    <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/to-do.css">
 
   </head>
 
   <body>
 
-  <section id="container" >
+    <section id="container" >
 
       <header class="header black-bg">
               <div class="sidebar-toggle-box">
@@ -135,63 +137,61 @@
               </ul>
           </div>
       </aside>
-
       <section id="main-content">
           <section class="wrapper">
+          	<h3><i class="fa fa-angle-right"></i> Calendar</h3>
+              <div class="row mt">
+                  <aside class="col-lg-3 mt">
+                      <h4><i class="fa fa-angle-right"></i> Draggable Events</h4>
+                      <div id="external-events">
+                          <div class="external-event label label-theme">My Event 1</div>
+                          <div class="external-event label label-success">My Event 2</div>
+                          <div class="external-event label label-info">My Event 3</div>
+                          <div class="external-event label label-warning">My Event 4</div>
+                          <div class="external-event label label-danger">My Event 5</div>
+                          <div class="external-event label label-default">My Event 6</div>
+                          <div class="external-event label label-theme">My Event 7</div>
+                          <div class="external-event label label-info">My Event 8</div>
+                          <div class="external-event label label-success">My Event 9</div>
+                          <p class="drop-after">
+                              <input type="checkbox" id="drop-remove">
+                              Remove After Drop
+                          </p>
+                      </div>
+                  </aside>
+                  <aside class="col-lg-9 mt">
+                      <section class="panel">
+                          <div class="panel-body">
+                              <div id="calendar" class="has-toolbar"></div>
+                          </div>
+                      </section>
+                  </aside>
+              </div>
 
+		</section>
+      </section>
   </section>
 
     <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/jquery-1.8.3.min.js"></script>
+    <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script src="assets/js/fullcalendar/fullcalendar.min.js"></script>    
     <script src="assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="assets/js/jquery.scrollTo.min.js"></script>
     <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="assets/js/jquery.sparkline.js"></script>
+
 
     <script src="assets/js/common-scripts.js"></script>
-    
-    <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
-    <script type="text/javascript" src="assets/js/gritter-conf.js"></script>
 
-    <script src="assets/js/sparkline-chart.js"></script>    
-	<script src="assets/js/zabuto_calendar.js"></script>	
-
-	<script type="application/javascript">
-        $(document).ready(function () {
-            $("#date-popover").popover({html: true, trigger: "manual"});
-            $("#date-popover").hide();
-            $("#date-popover").click(function (e) {
-                $(this).hide();
-            });
-        
-            $("#my-calendar").zabuto_calendar({
-                action: function () {
-                    return myDateFunction(this.id, false);
-                },
-                action_nav: function () {
-                    return myNavFunction(this.id);
-                },
-                ajax: {
-                    url: "show_data.php?action=1",
-                    modal: true
-                },
-                legend: [
-                    {type: "text", label: "Special event", badge: "00"},
-                    {type: "block", label: "Regular event", }
-                ]
-            });
-        });
-        
-        
-        function myNavFunction(id) {
-            $("#date-popover").hide();
-            var nav = $("#" + id).data("navigation");
-            var to = $("#" + id).data("to");
-            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-        }
-    </script>
+	<script src="assets/js/calendar-conf-events.js"></script>    
   
+  <script>
+
+      $(function(){
+          $("select.styled").customSelect();
+      });
+
+  </script>
 
   </body>
 </html>

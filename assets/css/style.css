@@ -11,11 +11,7 @@ body {
     transition: background 0.2s linear;
 }
 
-.bg{
-    background-image: url("E:/CBITHack/assets/img/balance.png");
-    height: 700px;
-    width: 1300px;
-}
+
 
 ul li {
     list-style: none;

@@ -1,11 +1,5 @@
 var firebaseConfig = {
-    apiKey: "AIzaSyCClz1s0RlmBAFjLgtnO8pXMofV2Fjufl4",
-    authDomain: "e-week-login.firebaseapp.com",
-    databaseURL: "https://e-week-login.firebaseio.com",
-    projectId: "e-week-login",
-    storageBucket: "e-week-login.appspot.com",
-    messagingSenderId: "919927265746",
-    appId: "1:919927265746:web:8bce96c4738f08b9c6100b"
+
 };
 
 firebase.initializeApp(firebaseConfig);

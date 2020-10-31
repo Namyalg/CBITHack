@@ -1,9 +1,4 @@
-var firebaseConfig = {
 
-};
-
-firebase.initializeApp(firebaseConfig);
-var login_details = firebase.database().ref().child("Login-details");
 function WriteCookie() {
     var name = document.getElementById("name").value;
     var eid = document.getElementById("email").value;
@@ -85,16 +80,4 @@ window.onload = function () {
         //window.location.href = "index.html";
     }
 }
-/*
-function myFunction(x){
-    if(x.matches){
-        document.getElementById("btn").style.height = "10px";
-    }
-    else
-    document.getElementById("btn").style.height = "100px";
-}
 
-var x  = window.matchMedia("(max-width: 700px)");
-myFunction(x);
-x.addListener(myFunction);
-*/

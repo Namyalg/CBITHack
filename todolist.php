@@ -8,7 +8,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>CTRL-R --DASHBOARD</title>
+    <title>CTRL-R -- TODO </title>
 
     <link href="assets/css/bootstrap.css" rel="stylesheet">
 
@@ -102,6 +102,11 @@
                     </li>
                 </ul>
             </div>
+            <div class="top-menu">
+                <ul class="nav pull-right top-menu">
+                    <li><a class="logout" href="login.html">Logout</a></li>
+                </ul>
+            </div>
         </header>
         <aside>
             <div id="sidebar" class="nav-collapse ">
@@ -124,114 +129,161 @@
                         </a>
                         <ul class="sub">
                             <li><a href="calendar.html">Calendar</a></li>
-                            <li class="active"><a href="todolist.php">Todo List</a></li>
+                            <li class="active"><a href="todo_list.html">Todo List</a></li>
                         </ul>
                     </li>
 
                 </ul>
             </div>
         </aside>
-        <div class="bg">
-            <section id="main-content">
-                <section class="wrapper">
-                    <div>
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                            <!-- Indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel" data-slide-to="1"></li>
-                                <li data-target="#myCarousel" data-slide-to="2"></li>
-                            </ol>
 
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img src="assets/img/balance.png" alt="Los Angeles">
+        <section id="main-content">
+            <section class="wrapper">
+                <h3><i class="fa fa-angle-right"></i> To-Do Lists</h3>
+                <div class="row mt mb">
+                    <div class="col-md-12">
+                        <section class="task-panel tasks-widget">
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h5><i class="fa fa-tasks"></i> Todo List </h5>
                                 </div>
+                                <br>
+                            </div>
+                            <div class="panel-body">
+                                <?php require_once 'process.php'; ?>
 
-                                <div class="item">
-                                    <img src="assets/img/peace.PNG" alt="Chicago">
+                                <?php
+        if(isset($_SESSION['message'])): ?>
+
+                                <div class="alert alert-<?=$_SESSION['msg_type']?>">
+                                    <div class="container">
+                                        <?php
+                echo $_SESSION['message'];
+                unset ($_SESSION['message']);
+            ?>
+                                    </div>
+
                                 </div>
+                                <?php endif ?>
 
-                                <div class="item">
-                                    <img src="assets/img/port04.jpg" alt="New York">
+
+                                <div class="container">
+
+                                    <?php 
+        $result = $mysqli->query("SELECT * FROM data") or die($mysqli->error);
+    ?>
+
+                                    <div class="row justify-content-center">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Topic</th>
+                                                    <th>Date</th>
+                                                    <th>Description</th>
+                                                    <th colspan="2">Action</th>
+                                                </tr>
+                                            </thead>
+
+                                            <?php while($row = $result->fetch_assoc()): ?>
+
+                                            <tr>
+                                                <td><?php echo $row['topic']; ?></td>
+                                                <td><?php echo $row['date']; ?></td>
+                                                <td><?php echo $row['description']; ?></td>
+                                                <td>
+                                                    <a href="todolist.php?edit=<?php echo $row['id'];?>" class="btn btn-info">Edit</a>
+                                                    <a href="process.php?delete=<?php echo $row['id'];?>" class="btn btn-danger">Delete</a>
+                                                </td>
+                                            </tr>
+
+                                            <?php endwhile ;?>
+                                        </table>
+
+                                    </div>
+
+                                    <?php
+                                        function pre_r( $array ){
+                                        echo '<pre>';
+                                        print_r( $array );
+                                        echo '</pre>';
+                                        }
+
+                                    ?>
+                                    <div class="row justify-content-center">
+                                        <form action="process.php" method="post">
+                                            <input type="hidden" name="id" value="<?php echo $id;?>">
+
+                                            <div class="form-group row">
+                                                <label><b>Topic</b></label>
+                                                <input type="text" name="topic" value="<?php echo $topic; ?>" class="form-control " placeholder="Topic Name..">
+                                            </div>
+                                            <div class="form-group row ">
+                                                <label><b>Date</b></label>
+                                                <input type="timestamp" name="date" value="<?php echo $date; ?>" class="form-control" placeholder="(D/M/Y)">
+                                            </div>
+                                            <div class="form-group row">
+                                                <label><b>Description</b></label>
+                                                <input type="message" name="description" value="<?php echo $description; ?>" class="form-control form-control-lg" placeholder="Details..">
+                                            </div>
+                                            <div class="form-group row">
+
+                                                <?php if($update == true): ?>
+                                                <button type="submit" class="btn btn-warning" name="update">Update</button>
+
+                                                <?php else: ?>
+                                                <button type="submit" class="btn btn-primary" name="save">Save</button>
+
+                                                <?php endif;?>
+
+                                            </div>
+                                        </form>
+
+                                    </div>
                                 </div>
                             </div>
-
-                            <!-- Left and right controls -->
-                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                    </div>  
+                            <div class=" add-task-row">
+                                <a class="btn btn-success btn-sm pull-left" href="todolist.php">Add New Tasks</a>
+                                <a class="btn btn-default btn-sm pull-right" href="todolist.php">See All Tasks</a>
+                            </div>
+                        </section>
                     </div>
+            </div>
+        
+        </section>
     </section>
-
     <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/jquery-1.8.3.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="assets/js/jquery.scrollTo.min.js"></script>
     <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="assets/js/jquery.sparkline.js"></script>
+
+
 
     <script src="assets/js/common-scripts.js"></script>
 
-    <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
-    <script type="text/javascript" src="assets/js/gritter-conf.js"></script>
 
-    <script src="assets/js/sparkline-chart.js"></script>
-    <script src="assets/js/zabuto_calendar.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="assets/js/tasks.js" type="text/javascript"></script>
 
-    <script type="application/javascript">
-        $(document).ready(function() {
-            $("#date-popover").popover({
-                html: true,
-                trigger: "manual"
-            });
-            $("#date-popover").hide();
-            $("#date-popover").click(function(e) {
-                $(this).hide();
-            });
-
-            $("#my-calendar").zabuto_calendar({
-                action: function() {
-                    return myDateFunction(this.id, false);
-                },
-                action_nav: function() {
-                    return myNavFunction(this.id);
-                },
-                ajax: {
-                    url: "show_data.php?action=1",
-                    modal: true
-                },
-                legend: [{
-                        type: "text",
-                        label: "Special event",
-                        badge: "00"
-                    },
-                    {
-                        type: "block",
-                        label: "Regular event",
-                    }
-                ]
-            });
+    <script>
+        jQuery(document).ready(function() {
+            TaskList.initTaskWidget();
         });
 
-
-        function myNavFunction(id) {
-            $("#date-popover").hide();
-            var nav = $("#" + id).data("navigation");
-            var to = $("#" + id).data("to");
-            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-        }
+        $(function() {
+            $("#sortable").sortable();
+            $("#sortable").disableSelection();
+        });
 
     </script>
 
+
+    <script>
+        $(function() {
+            $('select.styled').customSelect();
+        });
+
+    </script>
 
 </body>
 

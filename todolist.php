@@ -8,7 +8,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>CTRL-R -- TODO </title>
+    <title>CTRL-R</title>
 
     <link href="assets/css/bootstrap.css" rel="stylesheet">
 
